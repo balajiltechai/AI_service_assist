@@ -1,2 +1,2 @@
-# AI_docu_intelligence
+# AI_service_assist
 AI Solution for Service Documentation &amp; Change Intelligence

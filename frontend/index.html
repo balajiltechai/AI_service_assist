@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Service Documentation & Change Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css?v=20260314d" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">&#9881;</span>
+      <span>Service assist</span>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab" data-tab="demo">&#127916; Demo</button>
+      <button class="nav-tab active" data-tab="services">Services</button>
+      <button class="nav-tab" data-tab="ingest">Ingest</button>
+      <button class="nav-tab" data-tab="explain">Explain</button>
+      <button class="nav-tab" data-tab="compare">Compare</button>
+      <button class="nav-tab" data-tab="changelog">Changelog</button>
+      <button class="nav-tab" data-tab="gaps">Gap Analysis</button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ── Demo Tab ── -->
+    <section id="tab-demo" class="tab-pane hidden">
+
+      <!-- Hero -->
+      <div class="demo-hero">
+        <div class="demo-hero-text">
+          <div class="demo-hero-label">AI-Powered Documentation Intelligence</div>
+          <h1 class="demo-hero-title">From tribal knowledge<br>to self-maintaining docs</h1>
+          <p class="demo-hero-sub">
+            Ingest service artifacts (API specs, Git repos, logs, schemas).
+            Let AI generate living documentation that stays up-to-date automatically.
+          </p>
+          <div class="demo-hero-actions">
+            <button class="btn btn-primary btn-lg" onclick="switchTab('services')">&#128196; Browse Services</button>
+            <button class="btn btn-secondary btn-lg" onclick="switchTab('gaps')">&#128270; Detect Gaps</button>
+          </div>
+        </div>
+        <div class="demo-stats-grid">
+          <div class="demo-stat-pill">
+            <span class="demo-stat-num" id="stat-service-count">—</span>
+            <span class="demo-stat-lbl">Services Indexed</span>
+          </div>
+          <div class="demo-stat-pill">
+            <span class="demo-stat-num" id="stat-endpoints-count">—</span>
+            <span class="demo-stat-lbl">Endpoints Tracked</span>
+          </div>
+          <div class="demo-stat-pill accent">
+            <span class="demo-stat-num" id="stat-undocumented-count">—</span>
+            <span class="demo-stat-lbl">Without Documentation</span>
+          </div>
+          <div class="demo-stat-pill">
+            <span class="demo-stat-num" id="stat-documented-count">—</span>
+            <span class="demo-stat-lbl">Fully Documented</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Before / After -->
+      <div class="demo-section-title">
+        <span class="demo-section-badge">The Problem We Solve</span>
+        <h2>Before &amp; After: Documentation Reality</h2>
+      </div>
+
+      <div class="before-after-grid">
+        <div class="before-card">
+          <div class="ba-header before">
+            <span class="ba-icon">&#128561;</span>
+            <div>
+              <div class="ba-label">BEFORE</div>
+              <div class="ba-title">The Old Way</div>
+            </div>
+          </div>
+          <ul class="ba-list">
+            <li class="ba-item bad">&#10060; Sparse OpenAPI spec — no descriptions, no examples</li>
+            <li class="ba-item bad highlight">&#10060; Engineers ask Slack "how does /charge work?" every week</li>
+            <li class="ba-item bad highlight">&#10060; Onboarding takes 2–3 weeks just to understand APIs</li>
+            <li class="ba-item bad">&#10060; Tribal knowledge locked in 3 people's heads</li>
+            <li class="ba-item bad highlight">&#10060; No one knows what changed between v1 and v2</li>
+            <li class="ba-item bad">&#10060; 5 endpoints in traffic with zero documentation</li>
+            <li class="ba-item bad">&#10060; Deprecated endpoints still called in production</li>
+            <li class="ba-item bad">&#10060; Compliance audit fails — no auth documentation</li>
+          </ul>
+          <div class="ba-code-sample">
+            <div class="ba-code-label">Typical v1 spec entry:</div>
+            <pre class="ba-code">{
+  "/charge": {
+    "post": {
+      "summary": "",
+      "responses": {
+        "200": {
+          "description": "ok"
+        }
+      }
+    }
+  }
+}</pre>
+          </div>
+        </div>
+
+        <div class="after-card">
+          <div class="ba-header after">
+            <span class="ba-icon">&#129395;</span>
+            <div>
+              <div class="ba-label">AFTER</div>
+              <div class="ba-title">With Service assist</div>
+            </div>
+          </div>
+          <ul class="ba-list">
+            <li class="ba-item good">&#9989; AI-generated descriptions, samples, and auth requirements</li>
+            <li class="ba-item good highlight">&#9989; Developers self-serve answers from live docs in seconds</li>
+            <li class="ba-item good highlight">&#9989; New engineers productive in days, not weeks</li>
+            <li class="ba-item good">&#9989; Knowledge captured from specs, Git, logs, and schemas</li>
+            <li class="ba-item good highlight">&#9989; Structured changelog: "v2 adds 14 changes, 2 breaking"</li>
+            <li class="ba-item good">&#9989; Gap detection flags undocumented endpoints automatically</li>
+            <li class="ba-item good">&#9989; Deprecation notices surfaced with migration paths</li>
+            <li class="ba-item good">&#9989; Auth requirements documented with scope details</li>
+          </ul>
+          <div class="ba-code-sample after-sample">
+            <div class="ba-code-label">AI-generated endpoint doc:</div>
+            <pre class="ba-code after-code">{
+  "path": "/charges",
+  "method": "POST",
+  "summary": "Create a payment charge",
+  "description": "Initiates a payment charge against
+    a tokenized source. Set capture:false to authorize
+    without capturing — useful for hotel pre-auths
+    or marketplace escrow patterns...",
+  "authentication": "Bearer JWT, payments:write scope",
+  "sample_request": { "amount": 2999,
+    "currency": "USD", "source": "tok_visa" },
+  "sample_response": { "id": "ch_v2_xyz789",
+    "status": "succeeded" }
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works pipeline -->
+      <div class="demo-section-title">
+        <span class="demo-section-badge">Architecture</span>
+        <h2>How the Intelligence Pipeline Works</h2>
+      </div>
+
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <div class="pipeline-icon">&#128280;</div>
+          <div class="pipeline-num">01</div>
+          <h3>Ingest Artifacts</h3>
+          <p>Feed in OpenAPI specs, Git repositories, HTTP access logs, dataset schemas, and registry metadata.</p>
+          <div class="pipeline-chips">
+            <span class="chip">OpenAPI / Swagger</span>
+            <span class="chip">Git Repos</span>
+            <span class="chip">Access Logs</span>
+            <span class="chip">JSON Schema</span>
+            <span class="chip">Registry JSON</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-step">
+          <div class="pipeline-icon">&#129302;</div>
+          <div class="pipeline-num">02</div>
+          <h3>AI Generation</h3>
+          <p>LLM analyzes artifacts to generate service summaries, endpoint docs, sample requests/responses, and auth requirements.</p>
+          <div class="pipeline-chips">
+            <span class="chip">Service Summary</span>
+            <span class="chip">Endpoint Docs</span>
+            <span class="chip">Sample Payloads</span>
+            <span class="chip">Auth Flows</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-step">
+          <div class="pipeline-icon">&#128270;</div>
+          <div class="pipeline-num">03</div>
+          <h3>Gap Detection</h3>
+          <p>Compare traffic logs against documented endpoints. Flag undocumented, deprecated, or incomplete coverage.</p>
+          <div class="pipeline-chips">
+            <span class="chip">Undocumented Endpoints</span>
+            <span class="chip">Missing Descriptions</span>
+            <span class="chip">Coverage %</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-step">
+          <div class="pipeline-icon">&#128240;</div>
+          <div class="pipeline-num">04</div>
+          <h3>Publish &amp; Monitor</h3>
+          <p>Publish docs to developer portals, service registries, or Confluence. Version-aware — always current.</p>
+          <div class="pipeline-chips">
+            <span class="chip">Developer Portal</span>
+            <span class="chip">Version History</span>
+            <span class="chip">Change Intelligence</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcomes -->
+      <div class="demo-section-title">
+        <span class="demo-section-badge">Business Outcomes</span>
+        <h2>What This Delivers</h2>
+      </div>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div class="outcome-icon" style="background:rgba(34,197,94,.15);color:var(--success)">&#9200;</div>
+          <h3>Reduces Onboarding Time</h3>
+          <p>New engineers understand APIs in <strong>days</strong>, not weeks. Self-serve answers replace Slack questions and hallway conversations.</p>
+          <div class="outcome-metric">~70% reduction in onboarding time</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon" style="background:rgba(108,99,255,.15);color:var(--accent)">&#129309;</div>
+          <h3>Eliminates Tribal Knowledge</h3>
+          <p>Knowledge locked in senior engineers' heads is extracted, structured, and made permanently available.</p>
+          <div class="outcome-metric">100% of services documented</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon" style="background:rgba(56,189,248,.15);color:var(--info)">&#128260;</div>
+          <h3>Self-Maintaining Docs</h3>
+          <p>Re-ingest updated specs and docs regenerate automatically. Documentation stays synchronized with code.</p>
+          <div class="outcome-metric">Always up-to-date</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon" style="background:rgba(245,158,11,.15);color:var(--warning)">&#128736;</div>
+          <h3>Improves Governance</h3>
+          <p>Detect shadow APIs, undocumented endpoints, and compliance gaps. Full audit trail of what changed and when.</p>
+          <div class="outcome-metric">Gap detection in seconds</div>
+        </div>
+      </div>
+
+      <!-- Live demo walkthrough -->
+      <div class="demo-section-title">
+        <span class="demo-section-badge">Try It Now</span>
+        <h2>Interactive Demo Scenarios</h2>
+      </div>
+
+      <div class="scenario-grid">
+        <div class="scenario-card" onclick="runScenario('browse')">
+          <div class="scenario-num">1</div>
+          <h3>Browse the Service Registry</h3>
+          <p>Explore 5 pre-seeded microservices with AI-generated documentation including summaries, capabilities, and endpoint details.</p>
+          <button class="btn btn-primary" onclick="switchTab('services'); event.stopPropagation()">Open Services &#8594;</button>
+        </div>
+        <div class="scenario-card" onclick="runScenario('explain')">
+          <div class="scenario-num">2</div>
+          <h3>Explain a Service</h3>
+          <p>Ask plain-language questions about any service. "How do I authenticate?" "What does this endpoint return?"</p>
+          <button class="btn btn-primary" onclick="prefillExplain('payment-service', 'How do I create a payment charge and handle a failed payment?'); switchTab('explain'); event.stopPropagation()">Try Explain &#8594;</button>
+        </div>
+        <div class="scenario-card" onclick="runScenario('compare')">
+          <div class="scenario-num">3</div>
+          <h3>Compare v1 vs v2</h3>
+          <p>Side-by-side comparison of Payment Service v1 and v2. Understand what changed and why.</p>
+          <button class="btn btn-primary" onclick="prefillCompare('payment-service','v1','payment-service','v2'); switchTab('compare'); event.stopPropagation()">Compare Now &#8594;</button>
+        </div>
+        <div class="scenario-card" onclick="runScenario('changelog')">
+          <div class="scenario-num">4</div>
+          <h3>Change Intelligence</h3>
+          <p>Generate a structured changelog for payment-service v1→v2. See all 14 changes including 2 breaking changes flagged.</p>
+          <button class="btn btn-primary" onclick="prefillChangelog('payment-service','v1','v2'); switchTab('changelog'); event.stopPropagation()">View Changelog &#8594;</button>
+        </div>
+        <div class="scenario-card" onclick="runScenario('gaps')">
+          <div class="scenario-num">5</div>
+          <h3>Detect Documentation Gaps</h3>
+          <p>Compare live traffic against documented endpoints for payment-service. Find 5 undocumented endpoints including a shadow API.</p>
+          <button class="btn btn-primary" onclick="prefillGaps('payment-service'); switchTab('gaps'); event.stopPropagation()">Analyze Gaps &#8594;</button>
+        </div>
+        <div class="scenario-card" onclick="runScenario('ingest')">
+          <div class="scenario-num">6</div>
+          <h3>Ingest Your Own Service</h3>
+          <p>Paste any OpenAPI spec and watch the AI generate comprehensive documentation instantly.</p>
+          <button class="btn btn-primary" onclick="switchTab('ingest'); event.stopPropagation()">Ingest Artifact &#8594;</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Services Tab ── -->
+    <section id="tab-services" class="tab-pane active">
+      <div class="section-header">
+        <h2>Service Registry</h2>
+        <button class="btn btn-primary" onclick="loadServices()">Refresh</button>
+      </div>
+      <div id="services-list" class="card-grid">
+        <div class="loading">Loading services...</div>
+      </div>
+
+      <!-- Service Detail Panel -->
+      <div id="service-detail" class="detail-panel hidden">
+        <div class="detail-header">
+          <button class="btn btn-ghost" onclick="closeDetail()">&larr; Back</button>
+          <div class="detail-title">
+            <h3 id="detail-name"></h3>
+            <span id="detail-version" class="badge"></span>
+          </div>
+          <div class="detail-actions">
+            <button class="btn btn-primary" id="btn-generate">Generate Docs</button>
+            <button class="btn btn-secondary" id="btn-publish">Publish</button>
+          </div>
+        </div>
+
+        <div class="tabs-inner">
+          <button class="inner-tab active" data-inner="overview">Overview</button>
+          <button class="inner-tab" data-inner="endpoints">Endpoints</button>
+          <button class="inner-tab" data-inner="auth">Auth</button>
+        </div>
+
+        <div id="inner-overview" class="inner-pane active">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <h4>Summary</h4>
+              <p id="doc-summary"></p>
+            </div>
+            <div class="doc-card">
+              <h4>Capabilities</h4>
+              <ul id="doc-capabilities"></ul>
+            </div>
+          </div>
+          <div class="doc-card full">
+            <h4>Description</h4>
+            <p id="doc-description"></p>
+          </div>
+        </div>
+
+        <div id="inner-endpoints" class="inner-pane hidden">
+          <div id="endpoints-list"></div>
+        </div>
+
+        <div id="inner-auth" class="inner-pane hidden">
+          <div class="doc-card full">
+            <h4>Authentication Requirements</h4>
+            <p id="doc-auth"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Ingest Tab ── -->
+    <section id="tab-ingest" class="tab-pane hidden">
+      <h2>Ingest Service Artifact</h2>
+      <div class="form-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service ID</label>
+            <input type="text" id="ingest-service-id" placeholder="e.g. payment-service" />
+          </div>
+          <div class="form-group">
+            <label>Service Name</label>
+            <input type="text" id="ingest-service-name" placeholder="e.g. Payment Service" />
+          </div>
+          <div class="form-group">
+            <label>Version</label>
+            <input type="text" id="ingest-version" placeholder="e.g. v1, v2.1.0" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Artifact Type</label>
+          <select id="ingest-type" onchange="updateIngestPlaceholder()">
+            <option value="openapi">OpenAPI / Swagger Spec (JSON or YAML)</option>
+            <option value="git">Git Repository URL</option>
+            <option value="logs">HTTP Access Logs (JSON array or CLF)</option>
+            <option value="schema">Dataset Schema (JSON Schema or Avro)</option>
+            <option value="registry">Registry Metadata (JSON)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <textarea id="ingest-content" rows="14" placeholder="Paste your OpenAPI spec here..."></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="ingestArtifact()">Ingest Artifact</button>
+          <button class="btn btn-secondary" onclick="loadExample()">Load Example</button>
+        </div>
+        <div id="ingest-result" class="result-box hidden"></div>
+      </div>
+    </section>
+
+    <!-- ── Explain Tab ── -->
+    <section id="tab-explain" class="tab-pane hidden">
+      <h2>Explain This Service</h2>
+      <div class="form-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service ID</label>
+            <input type="text" id="explain-service-id" placeholder="e.g. payment-service" />
+          </div>
+          <div class="form-group">
+            <label>Version (optional)</label>
+            <input type="text" id="explain-version" placeholder="Leave blank for latest" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ask a question (optional)</label>
+          <input type="text" id="explain-question"
+            placeholder="e.g. How do I authenticate? What are the rate limits?" />
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="explainService()">Explain Service</button>
+        </div>
+        <div id="explain-result" class="result-box ai-response hidden"></div>
+      </div>
+    </section>
+
+    <!-- ── Compare Tab ── -->
+    <section id="tab-compare" class="tab-pane hidden">
+      <h2>API Version Change Intelligence</h2>
+      <div class="form-card">
+        <div class="compare-grid">
+          <div>
+            <h4>Service A</h4>
+            <div class="form-group">
+              <label>Service ID</label>
+              <input type="text" id="compare-id-a" placeholder="e.g. payment-service-v1" />
+            </div>
+            <div class="form-group">
+              <label>Version (optional)</label>
+              <input type="text" id="compare-ver-a" placeholder="Latest" />
+            </div>
+          </div>
+          <div class="compare-vs">VS</div>
+          <div>
+            <h4>Service B</h4>
+            <div class="form-group">
+              <label>Service ID</label>
+              <input type="text" id="compare-id-b" placeholder="e.g. payment-service-v2" />
+            </div>
+            <div class="form-group">
+              <label>Version (optional)</label>
+              <input type="text" id="compare-ver-b" placeholder="Latest" />
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="compareServices()">Compare Services</button>
+        </div>
+        <div id="compare-result" class="hidden">
+          <div class="compare-result-grid">
+            <div class="result-box ai-response" id="compare-narrative"></div>
+            <div class="compare-lists">
+              <div class="compare-col">
+                <h4>Similarities</h4>
+                <ul id="compare-similarities"></ul>
+              </div>
+              <div class="compare-col">
+                <h4>Differences</h4>
+                <ul id="compare-differences"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="recommendation-box" id="compare-recommendation"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Changelog Tab ── -->
+    <section id="tab-changelog" class="tab-pane hidden">
+      <h2>Change Intelligence</h2>
+      <div class="form-card">
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label>Service ID</label>
+            <input type="text" id="changelog-service-id" placeholder="e.g. payment-service" />
+          </div>
+          <div class="form-group">
+            <label>From Version</label>
+            <input type="text" id="changelog-from" placeholder="e.g. v1" />
+          </div>
+          <div class="form-group">
+            <label>To Version</label>
+            <input type="text" id="changelog-to" placeholder="e.g. v2" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="generateChangelog()">Generate Changelog</button>
+        </div>
+        <div id="changelog-result" class="hidden">
+          <div class="changelog-header">
+            <div id="changelog-summary" class="result-box ai-response"></div>
+            <div class="changelog-stats">
+              <div class="stat-box" id="stat-total"></div>
+              <div class="stat-box breaking" id="stat-breaking"></div>
+            </div>
+          </div>
+          <div id="changelog-entries"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Gap Analysis Tab ── -->
+    <section id="tab-gaps" class="tab-pane hidden">
+      <h2>Documentation Gap Analysis</h2>
+      <div class="form-card">
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label>Service ID</label>
+            <input type="text" id="gap-service-id" placeholder="e.g. payment-service" />
+          </div>
+          <div class="form-group">
+            <label>Version (optional)</label>
+            <input type="text" id="gap-version" placeholder="Latest" />
+          </div>
+          <div class="form-group center">
+            <label>Include AI Recommendations</label>
+            <input type="checkbox" id="gap-recommendations" style="width:auto;height:20px;" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="analyzeGaps()">Analyze Gaps</button>
+        </div>
+        <div id="gap-result" class="hidden">
+          <div class="gap-stats">
+            <div class="gap-stat-card" id="gap-coverage"></div>
+            <div class="gap-stat-card" id="gap-undoc-count"></div>
+            <div class="gap-stat-card" id="gap-severity"></div>
+          </div>
+          <div class="gap-lists">
+            <div class="gap-col">
+              <h4>Undocumented Endpoints (in traffic)</h4>
+              <div id="gap-undocumented"></div>
+            </div>
+            <div class="gap-col">
+              <h4>Endpoints Missing Descriptions</h4>
+              <div id="gap-missing"></div>
+            </div>
+          </div>
+          <div id="gap-recommendations-box" class="result-box ai-response hidden"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- AI Thinking overlay -->
+  <div id="ai-thinking" class="ai-thinking hidden">
+    <span class="ai-thinking-spark">✨</span>
+    <span class="ai-thinking-spark">✨</span>
+    <span class="ai-thinking-spark">✨</span>
+    <span class="ai-thinking-label">AI is thinking…</span>
+  </div>
+
+  <script src="/static/app.js?v=20260314e"></script>
+</body>
+</html>

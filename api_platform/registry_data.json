@@ -1,0 +1,335 @@
+{
+  "services": {
+    "payment-service": {
+      "service_id": "payment-service",
+      "name": "Payment Service",
+      "latest_version": "v2",
+      "description": "Handles all payment processing for the ACME platform",
+      "base_url": "https://api.acme.com/payments/v2",
+      "tags": [
+        "Payments",
+        "Finance",
+        "Critical"
+      ],
+      "created_at": "2026-03-13T23:34:41.013407",
+      "updated_at": "2026-03-13T23:34:41.343281"
+    },
+    "auth-service": {
+      "service_id": "auth-service",
+      "name": "Auth Service",
+      "latest_version": "v2",
+      "description": "Identity and access management",
+      "base_url": "https://api.acme.com/auth/v2",
+      "tags": [
+        "Auth",
+        "Security",
+        "Critical"
+      ],
+      "created_at": "2026-03-13T23:34:41.036016",
+      "updated_at": "2026-03-13T23:34:41.412466"
+    },
+    "order-service": {
+      "service_id": "order-service",
+      "name": "Order Service",
+      "latest_version": "v1",
+      "description": "Order lifecycle management",
+      "base_url": "https://api.acme.com/orders/v1",
+      "tags": [
+        "Orders",
+        "Commerce"
+      ],
+      "created_at": "2026-03-13T23:34:41.087708",
+      "updated_at": "2026-03-13T23:34:41.481192"
+    },
+    "notification-service": {
+      "service_id": "notification-service",
+      "name": "Notification Service",
+      "latest_version": "v1",
+      "description": "Multi-channel notification delivery (email, SMS, push)",
+      "base_url": "https://api.acme.com/notifications/v1",
+      "tags": [
+        "Notifications",
+        "Messaging"
+      ],
+      "created_at": "2026-03-13T23:34:41.145748",
+      "updated_at": "2026-03-13T23:34:41.550871"
+    },
+    "inventory-service": {
+      "service_id": "inventory-service",
+      "name": "Inventory Service",
+      "latest_version": "v1",
+      "description": "Real-time inventory tracking and warehouse management",
+      "base_url": "https://api.acme.com/inventory/v1",
+      "tags": [
+        "Inventory",
+        "Warehouse"
+      ],
+      "created_at": "2026-03-13T23:34:41.218889",
+      "updated_at": "2026-03-13T23:34:41.625483"
+    },
+    "transaction-service": {
+      "service_id": "transaction-service",
+      "name": "transaction-service",
+      "latest_version": "v1",
+      "description": null,
+      "base_url": null,
+      "tags": [],
+      "created_at": "2026-03-17T18:19:10.278178",
+      "updated_at": "2026-03-17T18:21:01.739362"
+    },
+    "sales-service": {
+      "service_id": "sales-service",
+      "name": "sales-service",
+      "latest_version": "v1",
+      "description": null,
+      "base_url": null,
+      "tags": [],
+      "created_at": "2026-03-17T18:28:20.587389",
+      "updated_at": "2026-03-17T18:30:06.036437"
+    },
+    "dispute": {
+      "service_id": "dispute",
+      "name": "dispute",
+      "latest_version": "v1",
+      "description": null,
+      "base_url": null,
+      "tags": [],
+      "created_at": "2026-03-17T20:24:14.951421",
+      "updated_at": "2026-03-20T13:03:52.996221"
+    }
+  },
+  "specs": {
+    "payment-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Payment Service\",\n    \"version\": \"v1\",\n    \"description\": \"\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/payments/v1\"\n    }\n  ],\n  \"paths\": {\n    \"/charge\": {\n      \"post\": {\n        \"summary\": \"\",\n        \"tags\": [\n          \"Payments\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"amount\": {\n                    \"type\": \"integer\"\n                  },\n                  \"currency\": {\n                    \"type\": \"string\"\n                  },\n                  \"source\": {\n                    \"type\": \"string\"\n                  }\n                },\n                \"required\": [\n                  \"amount\",\n                  \"currency\",\n                  \"source\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"ok\"\n          }\n        }\n      }\n    },\n    \"/refunds/{chargeId}\": {\n      \"post\": {\n        \"summary\": \"\",\n        \"deprecated\": true,\n        \"parameters\": [\n          {\n            \"name\": \"chargeId\",\n            \"in\": \"path\",\n            \"required\": true,\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"ok\"\n          }\n        }\n      }\n    },\n    \"/charges/{id}\": {\n      \"get\": {\n        \"summary\": \"\",\n        \"responses\": {\n          \"200\": {\n            \"description\": \"ok\"\n          }\n        }\n      }\n    },\n    \"/balance\": {\n      \"get\": {\n        \"summary\": \"\",\n        \"responses\": {\n          \"200\": {\n            \"description\": \"ok\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}",
+      "v2": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Payment Service\",\n    \"version\": \"v2\",\n    \"description\": \"Handles all payment processing for the ACME platform\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/payments/v2\"\n    }\n  ],\n  \"paths\": {\n    \"/charges\": {\n      \"post\": {\n        \"summary\": \"Create a charge\",\n        \"tags\": [\n          \"Charges\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"amount\": {\n                    \"type\": \"integer\",\n                    \"example\": 2999\n                  },\n                  \"currency\": {\n                    \"type\": \"string\",\n                    \"example\": \"USD\"\n                  },\n                  \"source\": {\n                    \"type\": \"string\",\n                    \"example\": \"tok_visa\"\n                  },\n                  \"capture\": {\n                    \"type\": \"boolean\",\n                    \"default\": true\n                  },\n                  \"metadata\": {\n                    \"type\": \"object\"\n                  }\n                },\n                \"required\": [\n                  \"amount\",\n                  \"currency\",\n                  \"source\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Charge created\"\n          },\n          \"402\": {\n            \"description\": \"Payment failed\"\n          }\n        }\n      },\n      \"get\": {\n        \"summary\": \"List charges\",\n        \"tags\": [\n          \"Charges\"\n        ],\n        \"parameters\": [\n          {\n            \"name\": \"limit\",\n            \"in\": \"query\",\n            \"schema\": {\n              \"type\": \"integer\",\n              \"default\": 10\n            }\n          },\n          {\n            \"name\": \"customer_id\",\n            \"in\": \"query\",\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          },\n          {\n            \"name\": \"created_after\",\n            \"in\": \"query\",\n            \"schema\": {\n              \"type\": \"string\",\n              \"format\": \"date-time\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"List of charges\"\n          }\n        }\n      }\n    },\n    \"/charges/{chargeId}\": {\n      \"get\": {\n        \"summary\": \"Retrieve a charge\",\n        \"tags\": [\n          \"Charges\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Charge object\"\n          },\n          \"404\": {\n            \"description\": \"Not found\"\n          }\n        }\n      },\n      \"patch\": {\n        \"summary\": \"Update charge metadata\",\n        \"tags\": [\n          \"Charges\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated charge\"\n          }\n        }\n      }\n    },\n    \"/charges/{chargeId}/capture\": {\n      \"post\": {\n        \"summary\": \"Capture an authorized charge\",\n        \"tags\": [\n          \"Charges\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Captured\"\n          }\n        }\n      }\n    },\n    \"/refunds\": {\n      \"post\": {\n        \"summary\": \"Create a refund\",\n        \"tags\": [\n          \"Refunds\"\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"charge_id\": {\n                    \"type\": \"string\"\n                  },\n                  \"amount\": {\n                    \"type\": \"integer\"\n                  },\n                  \"reason\": {\n                    \"type\": \"string\",\n                    \"enum\": [\n                      \"duplicate\",\n                      \"fraudulent\",\n                      \"requested_by_customer\"\n                    ]\n                  }\n                },\n                \"required\": [\n                  \"charge_id\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Refund created\"\n          }\n        }\n      }\n    },\n    \"/customers\": {\n      \"post\": {\n        \"summary\": \"Create a customer\",\n        \"tags\": [\n          \"Customers\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Customer created\"\n          }\n        }\n      },\n      \"get\": {\n        \"summary\": \"List customers\",\n        \"tags\": [\n          \"Customers\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"List of customers\"\n          }\n        }\n      }\n    },\n    \"/customers/{customerId}/payment-methods\": {\n      \"get\": {\n        \"summary\": \"List saved payment methods\",\n        \"tags\": [\n          \"Customers\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Payment methods\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Attach a payment method\",\n        \"tags\": [\n          \"Customers\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Attached\"\n          }\n        }\n      }\n    },\n    \"/webhooks\": {\n      \"post\": {\n        \"summary\": \"Register a webhook endpoint\",\n        \"tags\": [\n          \"Webhooks\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Webhook registered\"\n          }\n        }\n      },\n      \"get\": {\n        \"summary\": \"List webhooks\",\n        \"tags\": [\n          \"Webhooks\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Webhooks list\"\n          }\n        }\n      }\n    },\n    \"/balance\": {\n      \"get\": {\n        \"summary\": \"Retrieve account balance\",\n        \"tags\": [\n          \"Balance\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Balance object\"\n          }\n        }\n      }\n    },\n    \"/payouts\": {\n      \"post\": {\n        \"summary\": \"Create a payout\",\n        \"tags\": [\n          \"Payouts\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Payout created\"\n          }\n        }\n      },\n      \"get\": {\n        \"summary\": \"List payouts\",\n        \"tags\": [\n          \"Payouts\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Payouts list\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\",\n        \"bearerFormat\": \"JWT\"\n      }\n    }\n  }\n}"
+    },
+    "auth-service": {
+      "v2": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Auth Service\",\n    \"version\": \"v2\",\n    \"description\": \"Identity and access management\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/auth/v2\"\n    }\n  ],\n  \"paths\": {\n    \"/login\": {\n      \"post\": {\n        \"summary\": \"Authenticate user\",\n        \"tags\": [\n          \"Auth\"\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"email\": {\n                    \"type\": \"string\"\n                  },\n                  \"password\": {\n                    \"type\": \"string\"\n                  }\n                },\n                \"required\": [\n                  \"email\",\n                  \"password\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"JWT tokens returned\"\n          },\n          \"401\": {\n            \"description\": \"Invalid credentials\"\n          }\n        }\n      }\n    },\n    \"/logout\": {\n      \"post\": {\n        \"summary\": \"Invalidate session\",\n        \"tags\": [\n          \"Auth\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Logged out\"\n          }\n        }\n      }\n    },\n    \"/refresh\": {\n      \"post\": {\n        \"summary\": \"Refresh access token\",\n        \"tags\": [\n          \"Auth\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"New access token\"\n          },\n          \"401\": {\n            \"description\": \"Expired refresh token\"\n          }\n        }\n      }\n    },\n    \"/me\": {\n      \"get\": {\n        \"summary\": \"Get current user profile\",\n        \"tags\": [\n          \"Profile\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"User profile\"\n          }\n        }\n      }\n    },\n    \"/users\": {\n      \"post\": {\n        \"summary\": \"Register a new user\",\n        \"tags\": [\n          \"Users\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"User created\"\n          },\n          \"409\": {\n            \"description\": \"Email exists\"\n          }\n        }\n      }\n    },\n    \"/users/{userId}/roles\": {\n      \"get\": {\n        \"summary\": \"Get user roles\",\n        \"tags\": [\n          \"RBAC\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Roles list\"\n          }\n        }\n      },\n      \"put\": {\n        \"summary\": \"Set user roles\",\n        \"tags\": [\n          \"RBAC\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Roles updated\"\n          }\n        }\n      }\n    },\n    \"/oauth/authorize\": {\n      \"get\": {\n        \"summary\": \"OAuth2 authorization endpoint\",\n        \"tags\": [\n          \"OAuth\"\n        ],\n        \"responses\": {\n          \"302\": {\n            \"description\": \"Redirect to provider\"\n          }\n        }\n      }\n    },\n    \"/oauth/callback\": {\n      \"get\": {\n        \"summary\": \"OAuth2 callback handler\",\n        \"tags\": [\n          \"OAuth\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Tokens issued\"\n          }\n        }\n      }\n    },\n    \"/verify-email\": {\n      \"post\": {\n        \"summary\": \"Verify email address\",\n        \"tags\": [\n          \"Users\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Email verified\"\n          }\n        }\n      }\n    },\n    \"/forgot-password\": {\n      \"post\": {\n        \"summary\": \"Initiate password reset\",\n        \"tags\": [\n          \"Users\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Reset email sent\"\n          }\n        }\n      }\n    },\n    \"/reset-password\": {\n      \"post\": {\n        \"summary\": \"Complete password reset\",\n        \"tags\": [\n          \"Users\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Password updated\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    },
+    "order-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Order Service\",\n    \"version\": \"v1\",\n    \"description\": \"Order lifecycle management\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/orders/v1\"\n    }\n  ],\n  \"paths\": {\n    \"/orders\": {\n      \"post\": {\n        \"summary\": \"Place a new order\",\n        \"tags\": [\n          \"Orders\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Order created\"\n          },\n          \"400\": {\n            \"description\": \"Invalid order\"\n          }\n        }\n      },\n      \"get\": {\n        \"summary\": \"List orders\",\n        \"tags\": [\n          \"Orders\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Orders list\"\n          }\n        }\n      }\n    },\n    \"/orders/{orderId}\": {\n      \"get\": {\n        \"summary\": \"Get order details\",\n        \"tags\": [\n          \"Orders\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Order object\"\n          }\n        }\n      },\n      \"patch\": {\n        \"summary\": \"Update order status\",\n        \"tags\": [\n          \"Orders\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated order\"\n          }\n        }\n      }\n    },\n    \"/orders/{orderId}/cancel\": {\n      \"post\": {\n        \"summary\": \"Cancel an order\",\n        \"tags\": [\n          \"Orders\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Cancelled\"\n          }\n        }\n      }\n    },\n    \"/orders/{orderId}/tracking\": {\n      \"get\": {\n        \"summary\": \"Get shipping tracking info\",\n        \"tags\": [\n          \"Shipping\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Tracking data\"\n          }\n        }\n      }\n    },\n    \"/cart\": {\n      \"get\": {\n        \"summary\": \"Get current cart\",\n        \"tags\": [\n          \"Cart\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Cart\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Add item to cart\",\n        \"tags\": [\n          \"Cart\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Cart updated\"\n          }\n        }\n      },\n      \"delete\": {\n        \"summary\": \"Clear cart\",\n        \"tags\": [\n          \"Cart\"\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Cleared\"\n          }\n        }\n      }\n    },\n    \"/cart/{itemId}\": {\n      \"patch\": {\n        \"summary\": \"Update cart item quantity\",\n        \"tags\": [\n          \"Cart\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated\"\n          }\n        }\n      },\n      \"delete\": {\n        \"summary\": \"Remove cart item\",\n        \"tags\": [\n          \"Cart\"\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Removed\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    },
+    "notification-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Notification Service\",\n    \"version\": \"v1\",\n    \"description\": \"Multi-channel notification delivery (email, SMS, push)\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/notifications/v1\"\n    }\n  ],\n  \"paths\": {\n    \"/send\": {\n      \"post\": {\n        \"summary\": \"Send a notification\",\n        \"tags\": [\n          \"Notifications\"\n        ],\n        \"security\": [\n          {\n            \"apiKey\": []\n          }\n        ],\n        \"responses\": {\n          \"202\": {\n            \"description\": \"Notification queued\"\n          }\n        }\n      }\n    },\n    \"/send/batch\": {\n      \"post\": {\n        \"summary\": \"Send bulk notifications\",\n        \"tags\": [\n          \"Notifications\"\n        ],\n        \"responses\": {\n          \"202\": {\n            \"description\": \"Batch queued\"\n          }\n        }\n      }\n    },\n    \"/templates\": {\n      \"get\": {\n        \"summary\": \"List notification templates\",\n        \"tags\": [\n          \"Templates\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Templates list\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Create a template\",\n        \"tags\": [\n          \"Templates\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Template created\"\n          }\n        }\n      }\n    },\n    \"/templates/{templateId}\": {\n      \"get\": {\n        \"summary\": \"Get template\",\n        \"tags\": [\n          \"Templates\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Template\"\n          }\n        }\n      },\n      \"put\": {\n        \"summary\": \"Update template\",\n        \"tags\": [\n          \"Templates\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated\"\n          }\n        }\n      },\n      \"delete\": {\n        \"summary\": \"Delete template\",\n        \"tags\": [\n          \"Templates\"\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Deleted\"\n          }\n        }\n      }\n    },\n    \"/notifications/{notificationId}\": {\n      \"get\": {\n        \"summary\": \"Get notification status\",\n        \"tags\": [\n          \"Status\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Notification status\"\n          }\n        }\n      }\n    },\n    \"/preferences/{userId}\": {\n      \"get\": {\n        \"summary\": \"Get user notification preferences\",\n        \"tags\": [\n          \"Preferences\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Preferences\"\n          }\n        }\n      },\n      \"put\": {\n        \"summary\": \"Update notification preferences\",\n        \"tags\": [\n          \"Preferences\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated\"\n          }\n        }\n      }\n    },\n    \"/unsubscribe\": {\n      \"post\": {\n        \"summary\": \"Global unsubscribe\",\n        \"tags\": [\n          \"Preferences\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Unsubscribed\"\n          }\n        }\n      }\n    },\n    \"/email/send\": {\n      \"post\": {\n        \"summary\": \"Send email (legacy)\",\n        \"deprecated\": true,\n        \"tags\": [\n          \"Legacy\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Sent\"\n          }\n        }\n      }\n    },\n    \"/sms/send\": {\n      \"post\": {\n        \"summary\": \"Send SMS (legacy)\",\n        \"deprecated\": true,\n        \"tags\": [\n          \"Legacy\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Sent\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"apiKey\": {\n        \"type\": \"apiKey\",\n        \"in\": \"header\",\n        \"name\": \"X-API-Key\"\n      }\n    }\n  }\n}"
+    },
+    "inventory-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Inventory Service\",\n    \"version\": \"v1\",\n    \"description\": \"Real-time inventory tracking and warehouse management\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.acme.com/inventory/v1\"\n    }\n  ],\n  \"paths\": {\n    \"/products\": {\n      \"get\": {\n        \"summary\": \"List products\",\n        \"tags\": [\n          \"Products\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Products\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Create product\",\n        \"tags\": [\n          \"Products\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Created\"\n          }\n        }\n      }\n    },\n    \"/products/{productId}\": {\n      \"get\": {\n        \"summary\": \"Get product\",\n        \"tags\": [\n          \"Products\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Product\"\n          }\n        }\n      },\n      \"put\": {\n        \"summary\": \"Update product\",\n        \"tags\": [\n          \"Products\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Updated\"\n          }\n        }\n      },\n      \"delete\": {\n        \"summary\": \"Archive product\",\n        \"tags\": [\n          \"Products\"\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Archived\"\n          }\n        }\n      }\n    },\n    \"/products/{productId}/stock\": {\n      \"get\": {\n        \"summary\": \"Get current stock level\",\n        \"tags\": [\n          \"Stock\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Stock info\"\n          }\n        }\n      },\n      \"patch\": {\n        \"summary\": \"Adjust stock level\",\n        \"tags\": [\n          \"Stock\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Stock adjusted\"\n          }\n        }\n      }\n    },\n    \"/warehouses\": {\n      \"get\": {\n        \"summary\": \"List warehouses\",\n        \"tags\": [\n          \"Warehouses\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Warehouses\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Register warehouse\",\n        \"tags\": [\n          \"Warehouses\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Registered\"\n          }\n        }\n      }\n    },\n    \"/warehouses/{warehouseId}/inventory\": {\n      \"get\": {\n        \"summary\": \"Get warehouse inventory\",\n        \"tags\": [\n          \"Warehouses\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Inventory list\"\n          }\n        }\n      }\n    },\n    \"/reservations\": {\n      \"post\": {\n        \"summary\": \"Reserve stock for order\",\n        \"tags\": [\n          \"Reservations\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Reserved\"\n          },\n          \"409\": {\n            \"description\": \"Insufficient stock\"\n          }\n        }\n      },\n      \"delete\": {\n        \"summary\": \"Release reservation\",\n        \"tags\": [\n          \"Reservations\"\n        ],\n        \"responses\": {\n          \"204\": {\n            \"description\": \"Released\"\n          }\n        }\n      }\n    },\n    \"/alerts\": {\n      \"get\": {\n        \"summary\": \"Get low-stock alerts\",\n        \"tags\": [\n          \"Alerts\"\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Alerts\"\n          }\n        }\n      },\n      \"post\": {\n        \"summary\": \"Create stock alert rule\",\n        \"tags\": [\n          \"Alerts\"\n        ],\n        \"responses\": {\n          \"201\": {\n            \"description\": \"Alert rule created\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    },
+    "transaction-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Transaction Service\",\n    \"version\": \"v2\",\n    \"description\": \"Handles Transaction processing\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.example.com/Trasaction\"\n    }\n  ],\n  \"paths\": {\n    \"/charge\": {\n      \"post\": {\n        \"summary\": \"Create a charge Transaction\",\n        \"tags\": [\n          \"Payments\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"amount\": {\n                    \"type\": \"integer\",\n                    \"example\": 1000\n                  },\n                  \"currency\": {\n                    \"type\": \"string\",\n                    \"example\": \"USD\"\n                  },\n                  \"source\": {\n                    \"type\": \"string\",\n                    \"example\": \"tok_visa\"\n                  }\n                },\n                \"required\": [\n                  \"amount\",\n                  \"currency\",\n                  \"source\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Transaction Charge created\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": {\n                      \"type\": \"string\",\n                      \"example\": \"ch_123\"\n                    },\n                    \"status\": {\n                      \"type\": \"string\",\n                      \"example\": \"succeeded\"\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"/refunds/{TranchargeId}\": {\n      \"post\": {\n        \"summary\": \"Refund a charge\",\n        \"tags\": [\n          \"Refunds\"\n        ],\n        \"deprecated\": true,\n        \"parameters\": [\n          {\n            \"name\": \"TranchargeId\",\n            \"in\": \"path\",\n            \"required\": true,\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Transaction Refund processed\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    },
+    "sales-service": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Sales Service\",\n    \"version\": \"v2\",\n    \"description\": \"Handles Sales processing\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.example.com/Sales\"\n    }\n  ],\n  \"paths\": {\n    \"/charge\": {\n      \"post\": {\n        \"summary\": \"Create a Sales\",\n        \"tags\": [\n          \"Sales\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"amount\": {\n                    \"type\": \"integer\",\n                    \"example\": 1000\n                  },\n                  \"currency\": {\n                    \"type\": \"string\",\n                    \"example\": \"USD\"\n                  },\n                  \"source\": {\n                    \"type\": \"string\",\n                    \"example\": \"tok_visa\"\n                  }\n                },\n                \"required\": [\n                  \"amount\",\n                  \"currency\",\n                  \"source\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Sales created\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": {\n                      \"type\": \"string\",\n                      \"example\": \"ch_123\"\n                    },\n                    \"status\": {\n                      \"type\": \"string\",\n                      \"example\": \"succeeded\"\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"/refunds/{SalesId}\": {\n      \"post\": {\n        \"summary\": \"Create new sales\",\n        \"tags\": [\n          \"Refunds\"\n        ],\n        \"deprecated\": true,\n        \"parameters\": [\n          {\n            \"name\": \"salesId\",\n            \"in\": \"path\",\n            \"required\": true,\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Refund processed\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    },
+    "dispute": {
+      "v1": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"Payment Service\",\n    \"version\": \"v2\",\n    \"description\": \"Dispute processing\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.example.com/Dispute\"\n    }\n  ],\n  \"paths\": {\n    \"/charge\": {\n      \"post\": {\n        \"summary\": \"Create a dispute charge\",\n        \"tags\": [\n          \"Payments\"\n        ],\n        \"security\": [\n          {\n            \"bearerAuth\": []\n          }\n        ],\n        \"requestBody\": {\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                  \"amount\": {\n                    \"type\": \"integer\",\n                    \"example\": 1000\n                  },\n                  \"currency\": {\n                    \"type\": \"string\",\n                    \"example\": \"USD\"\n                  },\n                  \"source\": {\n                    \"type\": \"string\",\n                    \"example\": \"tok_visa\"\n                  }\n                },\n                \"required\": [\n                  \"amount\",\n                  \"currency\",\n                  \"source\"\n                ]\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Charge created\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": {\n                      \"type\": \"string\",\n                      \"example\": \"ch_123\"\n                    },\n                    \"status\": {\n                      \"type\": \"string\",\n                      \"example\": \"succeeded\"\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"/refunds/{chargeId}\": {\n      \"post\": {\n        \"summary\": \"Refund a charge\",\n        \"tags\": [\n          \"Refunds\"\n        ],\n        \"deprecated\": true,\n        \"parameters\": [\n          {\n            \"name\": \"chargeId\",\n            \"in\": \"path\",\n            \"required\": true,\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Refund processed\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"securitySchemes\": {\n      \"bearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}"
+    }
+  },
+  "traffic": {
+    "payment-service": [
+      {
+        "method": "POST",
+        "path": "/charges",
+        "hit_count": 8920
+      },
+      {
+        "method": "GET",
+        "path": "/charges",
+        "hit_count": 3210
+      },
+      {
+        "method": "GET",
+        "path": "/charges/{chargeId}",
+        "hit_count": 12400
+      },
+      {
+        "method": "POST",
+        "path": "/charges/{chargeId}/capture",
+        "hit_count": 1890
+      },
+      {
+        "method": "POST",
+        "path": "/refunds",
+        "hit_count": 2340
+      },
+      {
+        "method": "GET",
+        "path": "/balance",
+        "hit_count": 890
+      },
+      {
+        "method": "POST",
+        "path": "/customers",
+        "hit_count": 1200
+      },
+      {
+        "method": "GET",
+        "path": "/customers",
+        "hit_count": 780
+      },
+      {
+        "method": "DELETE",
+        "path": "/customers/{customerId}",
+        "hit_count": 234
+      },
+      {
+        "method": "GET",
+        "path": "/charges/{chargeId}/timeline",
+        "hit_count": 891
+      },
+      {
+        "method": "POST",
+        "path": "/disputes/{disputeId}/evidence",
+        "hit_count": 56
+      },
+      {
+        "method": "GET",
+        "path": "/reports/revenue",
+        "hit_count": 127
+      },
+      {
+        "method": "PUT",
+        "path": "/webhooks/{webhookId}",
+        "hit_count": 43
+      },
+      {
+        "method": "POST",
+        "path": "/webhooks",
+        "hit_count": 320
+      },
+      {
+        "method": "GET",
+        "path": "/payouts",
+        "hit_count": 450
+      }
+    ],
+    "auth-service": [
+      {
+        "method": "POST",
+        "path": "/login",
+        "hit_count": 45200
+      },
+      {
+        "method": "POST",
+        "path": "/refresh",
+        "hit_count": 89300
+      },
+      {
+        "method": "GET",
+        "path": "/me",
+        "hit_count": 156000
+      },
+      {
+        "method": "POST",
+        "path": "/logout",
+        "hit_count": 12000
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/jwks.json",
+        "hit_count": 15420
+      },
+      {
+        "method": "POST",
+        "path": "/users",
+        "hit_count": 890
+      },
+      {
+        "method": "GET",
+        "path": "/users/{userId}/roles",
+        "hit_count": 2300
+      },
+      {
+        "method": "POST",
+        "path": "/users/{userId}/disable",
+        "hit_count": 12
+      },
+      {
+        "method": "GET",
+        "path": "/oauth/authorize",
+        "hit_count": 3400
+      }
+    ],
+    "transaction-service": [
+      {
+        "method": "POST",
+        "path": "/Trancharge",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/Trancharge/ch_123",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/Tranchargerefunds/ch_456",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/webhooks",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/webhooks/register",
+        "hit_count": 1
+      }
+    ],
+    "sales-service": [
+      {
+        "method": "POST",
+        "path": "/sales",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/sales/ch_123",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/sales/ch_456",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/webhooks",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/webhooks/register",
+        "hit_count": 1
+      }
+    ],
+    "dispute": [
+      {
+        "method": "POST",
+        "path": "/dispute",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/disputecharges/ch_123",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/dispute/ch_456",
+        "hit_count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/webhooks",
+        "hit_count": 1
+      },
+      {
+        "method": "POST",
+        "path": "/webhooks/register",
+        "hit_count": 1
+      }
+    ]
+  }
+}
